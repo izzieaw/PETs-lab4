@@ -1,0 +1,64 @@
+{
+  "tests": [
+    {
+      "name": "task 1",
+      "setup": "",
+      "run": "pytest -v -m task1",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "task 2",
+      "setup": "",
+      "run": "pytest -v -m task2",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "task 3",
+      "setup": "",
+      "run": "pytest -v -m task3",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "task 4",
+      "setup": "",
+      "run": "pytest -v -m task4",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "task 5",
+      "setup": "",
+      "run": "pytest -v -m task5",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "task Q2",
+      "setup": "",
+      "run": "pytest -v -k test_prove_something",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 0
+    }
+  ]
+}
