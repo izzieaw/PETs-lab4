@@ -68,10 +68,10 @@ def prove_key(params: Params, priv: PrivKey, pub: PubKey) -> ProofOfKey:
     """
     g, hs, o = params
 
-    # TODO: YOUR CODE HERE
-    ...
-    c = ...
-    r = ...
+    w = Integer.random_range(min_inclusive=1, max_exclusive=o)
+    big_w = g * w
+    c = to_challenge([g, pub, big_w])
+    r = o + w - c * priv % o
     return c, r
 
 
