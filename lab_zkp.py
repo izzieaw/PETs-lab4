@@ -119,7 +119,7 @@ def prove_commitment(params: Params, C: Commitment, r: Opening, secrets: list[In
         responses.append(o + w[i] - c * secrets[i] % o)
     rr = o - r * c % o
     responses.append(rr)
-    
+
     return c, responses
 
 
@@ -168,9 +168,11 @@ def verify_dl_equality(params: Params, K: PubKey, L: PubKey, proof: ProofOfKey) 
     g, (h0, h1, h2, h3), o = params
     c, r = proof
 
-    # TODO: YOUR CODE HERE
-    ...
-    valid = ...
+    K_prime = g * r + K * c
+    L_prime = h0 * r + L * c
+    c_prime = to_challenge([g, h0, K, K_prime, L, L_prime])
+
+    valid = c_prime == c
 
     return valid
 
