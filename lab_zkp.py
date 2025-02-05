@@ -111,11 +111,15 @@ def prove_commitment(params: Params, C: Commitment, r: Opening, secrets: list[In
 
     w = [Integer.random_range(min_inclusive=1, max_exclusive=o) for _ in range(4)]
     big_w = w[0] * h0 + w[1] * h1 + w[2] * h2 + w[3] * h3
+
     c = to_challenge([g, h0, h1, h2, h3, C, big_w])
+
     responses = []
     for i in range(4):
         responses.append(o + w[i] - c * secrets[i] % o)
-    responses.append(-r*c)
+    rr = o - r * c % o
+    responses.append(rr)
+    
     return c, responses
 
 
