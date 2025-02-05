@@ -248,10 +248,14 @@ def prove_x0eq10x1plus20(params: Params, C: Commitment, x0: int, x1: int, r: Ope
     """ Prove C is a commitment to x0 and x1 and that x0 = 10 x1 + 20. """
     g, (h0, h1, h2, h3), o = params
 
-    # TODO: YOUR CODE HERE
-    ...
-    c = ...
-    response = ...
+
+    w = Integer.random_range(min_inclusive=1, max_exclusive=o)
+    Cw = 20 * h0 + 10 * h0 * w + h1 * w
+
+    c = to_challenge([g, h0, h1, C, Cw])
+    r0 = (w - c * x1) % o
+    rr = g * r
+    response = r0, rr 
 
     return c, response
 
@@ -260,9 +264,12 @@ def verify_x0eq10x1plus20(params: Params, C: Commitment, proof: tuple[Integer, t
     """ Verify that proof of knowledge of C and x0 = 10 x1 + 20. """
     g, (h0, h1, h2, h3), o = params
 
-    # TODO: YOUR CODE HERE
-    ...
-    valid = ...
+    c, (r, rr) = proof
+
+    c0 = C * c + rr * c - Integer(10) * r * h0 + r * h1 - 20 * h0 * (c-1)
+    c_prime = to_challenge([g, h0, h1, C, c_prime])
+
+    valid = c_prime == c
 
     return valid
 
