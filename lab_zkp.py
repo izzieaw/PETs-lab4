@@ -40,11 +40,10 @@ def setup() -> Params:
 
 
 def key_gen(params: Params) -> tuple[PrivKey, PubKey]:
-    # TODO: COPY YOUR IMPLEMENTATION FROM THE HOMOMORPHIC ENCRYPTION LAB
-    ...
-    priv = ...
-    pub = ...
+    g, h, o = params
 
+    priv = Integer.random_range(min_inclusive=1, max_exclusive=o)
+    pub = priv * g
     return priv, pub
 
 
