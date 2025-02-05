@@ -198,10 +198,17 @@ def prove_enc(params: Params, pub: PubKey, ciphertext: CipherText, k: Integer, m
     g, (h0, h1, h2, h3), o = params
     a, b = ciphertext
 
-    # TODO: YOUR CODE HERE:
-    ...
-    c = ...
-    response = ...
+    # proof for k & m
+    w0 = Integer.random_range(min_inclusive=1, max_exclusive=o)
+    w1= Integer.random_range(min_inclusive=1, max_exclusive=o)
+
+    a_prime = g * w0
+    b_prime = pub * w0 + h0 * w1
+
+    c = to_challenge([g, h0, pub, a, a_prime, b, b_prime])
+    r0 = (w0 - c * k) % o
+    r1 = (w0 - c * m) % o
+    response = r0, r1
 
     return c, response
 
