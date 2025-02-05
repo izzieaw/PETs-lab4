@@ -202,12 +202,13 @@ def prove_enc(params: Params, pub: PubKey, ciphertext: CipherText, k: Integer, m
     w0 = Integer.random_range(min_inclusive=1, max_exclusive=o)
     w1= Integer.random_range(min_inclusive=1, max_exclusive=o)
 
-    a_prime = g * w0
-    b_prime = pub * w0 + h0 * w1
+    aw = g * w0
+    bw = pub * w0 + h0 * w1
 
-    c = to_challenge([g, h0, pub, a, a_prime, b, b_prime])
+    c = to_challenge([g, h0, pub, a, aw, b, bw])
+
     r0 = (w0 - c * k) % o
-    r1 = (w0 - c * m) % o
+    r1 = (w1 - c * m) % o
     response = r0, r1
 
     return c, response
@@ -219,9 +220,11 @@ def verify_enc(params: Params, pub: PubKey, ciphertext: CipherText, proof: Proof
     a, b = ciphertext
     c, (rk, rm) = proof
 
-    # TODO: YOUR CODE HERE
-    ...
-    valid = ...
+    a_prime = g * rk + c * a
+    b_prime = pub * rk + c * b + h0 * rm
+    c_prime = to_challenge([g, h0, pub, a, a_prime, b, b_prime])
+
+    valid = c_prime == c
 
     return valid
 
