@@ -266,10 +266,11 @@ def verify_x0eq10x1plus20(params: Params, C: Commitment, proof: tuple[Integer, t
     """ Verify that proof of knowledge of C and x0 = 10 x1 + 20. """
     g, (h0, h1, h2, h3), o = params
 
-    c, (r, rr) = proof
+    c, (r0, r1) = proof
 
-    c0 = C * c + rr * c - Integer(10) * r * h0 + r * h1 - 20 * h0 * (c-1)
-    c_prime = to_challenge([g, h0, h1, C, c_prime])
+    c0 = C * c + g * r0 + h1 * r1 + 10 * h0 * r1 + (-h0 * 20 * c)
+
+    c_prime = to_challenge([g, h0, h1, C, c0])
 
     valid = c_prime == c
 
