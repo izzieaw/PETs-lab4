@@ -249,13 +249,15 @@ def prove_x0eq10x1plus20(params: Params, C: Commitment, x0: int, x1: int, r: Ope
     g, (h0, h1, h2, h3), o = params
 
 
-    w = Integer.random_range(min_inclusive=1, max_exclusive=o)
-    Cw = 20 * h0 + 10 * h0 * w + h1 * w
+    w0 = Integer.random_range(min_inclusive=1, max_exclusive=o)
+    w1 = Integer.random_range(min_inclusive=1, max_exclusive=o)
+
+    Cw = g * w0 + h1 * w1 + 10 * h0 * w1    # ignore '+ 20 * h0'
 
     c = to_challenge([g, h0, h1, C, Cw])
-    r0 = (w - c * x1) % o
-    rr = g * r
-    response = r0, rr 
+    r0 = (w0 - c * r) % o
+    r1 = (w1 - c * x1) % o
+    response = r0, r1
 
     return c, response
 
