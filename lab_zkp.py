@@ -330,12 +330,7 @@ def test_bin_incorrect():
 # Does "plausible deniability" hold against a dishonest verifier that deviates from the Schnorr identification protocol?
 # Justify your answer by describing what a dishonest verifier may do.
 
-""" A dishonest verifier could choose the challenge, c, adaptively i.e. not at random in order to perform a rewinding/oracle replay attack. 
-    After completing 1 round of the protocol, the dishonest verifier could store the witness, challenge, response values from that round and 
-    then 'rewind': restart the round with the same witness, and send a different challenge. The verifier could then deduce the prover's secret 
-    using the two responses. However, even in this case, plausible deniability does hold. No matter what the dishonest verifier does, plausible 
-    deniability holds, as anyone can forge triplets that satisfy the verification equation (as per Slide 14 of Week 4 as mentionned above in the 
-    question). Therefore, whatever the dishonest verifier does, anyone else can still forge   """
+""" Plausible deniability against a dishonest verifier does hold.  """
 
 #####################################################
 # TASK Q2 - Answer the following question:
@@ -346,7 +341,8 @@ def test_bin_incorrect():
 #
 # Hint: Look at "test_prove_something" too.
 
-""" TODO: Your answer here. """
+""" Given the function below, the verifier is convinced that the prover knows both secrets x and y. This is due to the simulated proof for x without
+    knowledge of x being integrated with the proof of knowledge of y, as it is built such that c2 = (c - c1) mod o. """
 
 
 def prove_something(params, KX, KY, y):
