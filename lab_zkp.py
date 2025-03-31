@@ -330,7 +330,9 @@ def test_bin_incorrect():
 # Does "plausible deniability" hold against a dishonest verifier that deviates from the Schnorr identification protocol?
 # Justify your answer by describing what a dishonest verifier may do.
 
-""" Plausible deniability against a dishonest verifier does hold.  """
+""" Plausible deniability against a dishonest verifier does hold. A dishonest verifier could choose the challenge not at random, or could perform
+    a rewinding attack in an attempt to work out the secret. Despite this, the fact that the protocol can be simulated without knowledge of the secret
+    undermines this and maintains plausible deniability even with a dishonest verifier. """
 
 #####################################################
 # TASK Q2 - Answer the following question:
